@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include<ctime> // gives access to time() func
 using namespace std;
 
@@ -187,8 +188,15 @@ public:
             cout << SoftPink << "Enter move (Rock / Paper / Scissors): " << Reset;
             cin >> ym;
 
-            if (ym != "Rock" && ym != "Paper" && ym != "Scissors") {
-                cout << DustyPink << "Invalid Choice!" << Reset << endl; // displays if user chooses invalid choice
+            if (ym == "R" || ym == "r")  //will work for all the inputes i.e r,R,Rock,rock
+                ym = "Rock";
+            else if (ym == "P" || ym == "p")  ym = "Paper";
+            else if (ym == "S" || ym == "s")  ym = "Scissors";
+            else if (ym == "rock")  ym = "Rock";
+            else if (ym == "paper")  ym = "Paper";
+            else if (ym == "scissors")  ym = "Scissors";
+            else if (ym != "Rock" && ym != "Paper" && ym != "Scissors") { //lastly to display if the user enters invalid choice
+                cout << DustyPink << "INVALID CHOICE!" << Reset << endl;
                 break;
             }
 
@@ -231,11 +239,7 @@ public:
         else {
             cout << PeachPink << "GAME TIED!" << Reset << endl;
         }
-
-
-
     }
-
 
 };
 
@@ -253,7 +257,8 @@ int main() {
 
     //using while loop so the player can play again
 
-    while (playAgain == "yes" || playAgain == "Yes") {
+    while (playAgain == "yes" || playAgain == "Yes" ||
+        playAgain == "Y" || playAgain == "y") {
 
 
         cout << SoftPink << "\n1. Easy\n2. Medium\n3. Hard\n" << Reset;
@@ -269,7 +274,7 @@ int main() {
             cout << DustyPink << "Invalid Choice!" << Reset << endl;
             break;
         }
-    
+
         //calls reset score function for computer player
         p2->resetScore();
         //creating game object and passing the player objects
@@ -282,8 +287,22 @@ int main() {
 
         cout << RoseGlow << "\nPlay again? (Yes/No): " << Reset;
         cin >> playAgain;
+
+        //in order to accept both upper and lowercasae inputes eg. y,n,Y,N
+        if (playAgain == "Y" || playAgain == "y")
+            playAgain = "yes";
+
+        else if (playAgain == "N" || playAgain == "n")
+            playAgain = "no";
+
+        else if (playAgain == "YES")
+            playAgain = "yes";
+
+        else if (playAgain == "NO")
+            playAgain = "no";
     }
     cout << DeepRose << "THANK YOU FOR PLAYING!" << Reset;
+
     delete p1; //deleting human object
     delete p2;//deletes last computer object
 
